@@ -25,9 +25,9 @@
 
   button.addEventListener('click', function onClick () {
     const bar = PRIVATEASER.getBar();
-    const time = document.querySelector('.time').value;
-    const persons = document.querySelector('.persons').value;
-    const option = document.querySelector('.option').checked;
+    const time = document.querySelector('.js-time').value;
+    const persons = document.querySelector('.js-persons').value;
+    const option = document.querySelector('.js-option').checked;
     const actors = PRIVATEASER.payActors(bar, time, persons, option);
 
     render(actors);

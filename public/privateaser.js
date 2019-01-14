@@ -2,8 +2,11 @@
 'use strict';
 
 const PRIVATEASER = (() => {
-  const TREASURY_TAX_PERSON = 1;
   const DEDUCTIBLE_PER_PERSON = 1;
+  const PERCENT_COMMISSION = 0.3;
+  const PERCENT_INSURANCE = 0.5;
+  const TREASURY_TAX_PERSON = 1;
+
 
   /**
    * Get bar information
@@ -30,14 +33,14 @@ const PRIVATEASER = (() => {
     }
 
     if (persons > 20) {
-      return 0.3;
+      return 0.7;
     }
 
     if (persons > 10) {
-      return 0.1;
+      return 0.9;
     }
 
-    return 0;
+    return 1;
   };
 
   /**
@@ -48,8 +51,8 @@ const PRIVATEASER = (() => {
    * @return {Object}
    */
   const bookingCommission = (price, persons) => {
-    const value = parseFloat((price * 0.3).toFixed(2));
-    const insurance = parseFloat((value * 0.5).toFixed(2));
+    const value = parseFloat((price * PERCENT_COMMISSION).toFixed(2));
+    const insurance = parseFloat((value * PERCENT_INSURANCE).toFixed(2));
     const treasury = Math.ceil(persons / TREASURY_TAX_PERSON);
 
     return {
@@ -70,7 +73,7 @@ const PRIVATEASER = (() => {
    */
   const bookingPrice = (bar, time, persons) => {
     const percent = discount(persons);
-    const pricePerPerson = bar.pricePerPerson - bar.pricePerPerson * percent;
+    const pricePerPerson = bar.pricePerPerson * percent;
 
     return parseFloat((time * bar.pricePerHour + persons * pricePerPerson).toFixed(2));
   };
@@ -87,7 +90,7 @@ const PRIVATEASER = (() => {
   const payActors = (bar, time, persons, option) => {
     const price = bookingPrice(bar, time, persons);
     const commission = bookingCommission(price, persons);
-    const deductibleOption = option ? DEDUCTIBLE_PER_PERSON * persons : 0;
+    const deductibleOption = DEDUCTIBLE_PER_PERSON * persons * +option;
 
     var actors = [{
       'who': 'booker',

@@ -6,6 +6,12 @@ Continue as guest
 
 ---
 
+💶
+
+$300 Million
+
+---
+
 The results:
 
 * Number of customers purchasing went up by 45%
@@ -13,12 +19,6 @@ The results:
 ---
 
 * Extra $15 Million the first month
-
----
-
-💶
-
-$300 Million
 
 ---
 
